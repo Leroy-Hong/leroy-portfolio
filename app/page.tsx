@@ -105,7 +105,7 @@ function RightOverlay() {
 // }
 
 function MyScene() {
-  const coreRef = useRef<THREE.Group | null>(null);
+  const coreRef = useRef<THREE.Bone | null>(null);
   const chibiRef = useRef<THREE.Group | null>(null);
   const headRef = useRef<THREE.Object3D | null>(null);
   const targetRef = useRef<THREE.Mesh | null>(null); // Ref for the target sphere
@@ -209,7 +209,10 @@ function TestPage03() {
       </div>
     </div>
 
-    <p>Hello gang</p>
+    <p>Find me here: 
+      <a href="https://sites.google.com/view/leroyhongprofile33/achievements-and-projects"> https://sites.google.com/view/leroyhongprofile33/achievements-and-projects</a>
+    </p>
+    
     </>
     
   )
