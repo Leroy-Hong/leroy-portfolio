@@ -45,7 +45,7 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>
 export function Chibi(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
   const { nodes, materials, animations } = useGLTF('3D_models/chibi.glb') as GLTFResult
-  const { actions } = useAnimations<GLTFActions>(animations, group)
+  // const { actions } = useAnimations<GLTFActions>(animations, group)
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">

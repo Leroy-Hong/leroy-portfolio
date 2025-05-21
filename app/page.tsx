@@ -1,14 +1,14 @@
 'use client'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { Chibi } from './chibi'
-import { OrbitControls, Environment } from '@react-three/drei'
+import { Environment } from '@react-three/drei'
 import * as THREE from 'three'
 import NameIcon from '@/app/nameIcon'
 import SubheaderIcon from '@/app/subheaderIcon'
 
 
-import { Inter, League_Spartan, Poppins } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 
 const medPoppins = Poppins({
   subsets: ["latin"],
