@@ -1,6 +1,6 @@
 'use client'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import React, { useLayoutEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef, useEffect } from 'react'
 import { Chibi } from './chibi'
 import { Environment } from '@react-three/drei'
 import * as THREE from 'three'
@@ -22,39 +22,27 @@ const heavyPoppins = Poppins({
 
 
 function FrameLimiter({ fps = 60 }) {
-  const { advance, set, size, viewport } = useThree()
-  useLayoutEffect(() => {
-    let elapsed = 0
-    let then = 0
-    let raf: number = 0
+  const { invalidate, size } = useThree()
+  const intervalRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    // Clear any previous interval
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    // Calculate interval in ms
     const interval = 1000 / fps
+    // Set up interval to call invalidate at fixed FPS
+    intervalRef.current = window.setInterval(() => {
+      invalidate()
+    }, interval)
 
-    function tick(t: number) {
-      raf = requestAnimationFrame(tick)
-      elapsed = t - then
-      if (elapsed > interval) {
-        advance(t)
-        then = t - (elapsed % interval)
-      }
-    }
+    // Invalidate immediately on resize
+    invalidate()
 
-    function onResize() {
-      advance(performance.now()) // Force update on resize
-    }
-
-    // Set frameloop to never, it will shut down the default render loop
-    set({ frameloop: 'never' })
-    // Kick off custom render loop
-    raf = requestAnimationFrame(tick)
-    window.addEventListener('resize', onResize)
-
-    // Restore initial setting
+    // Clean up on unmount or fps/size change
     return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', onResize)
-      set({ frameloop: 'always' }) // Restore normal rendering on unmount
+      if (intervalRef.current) clearInterval(intervalRef.current)
     }
-  }, [fps, size, viewport]) // Include size and viewport in dependencies
+  }, [fps, size.width, size.height, invalidate])
 
   return null
 }
@@ -90,20 +78,6 @@ function RightOverlay() {
   )
 }
 
-// function MarblePlane() {
-//   return (
-//     <mesh scale={[1, 1, 1]}>
-//       <planeGeometry args={[10, 10]} />
-//       <shaderMaterial
-//         uniforms={MarbleShader.uniforms}
-//         vertexShader={MarbleShader.vertexShader}
-//         fragmentShader={MarbleShader.fragmentShader}
-        
-//       />
-//     </mesh>
-//   )
-// }
-
 function MyScene() {
   const coreRef = useRef<THREE.Bone | null>(null);
   const chibiRef = useRef<THREE.Group | null>(null);
@@ -112,13 +86,13 @@ function MyScene() {
   const emptyHeadRef = useRef<THREE.Group | null>(null);
 
   const { camera, pointer } = useThree(); // Pointer contains normalized mouse coordinates
-  const lerpFactor = 0.05; // Smoothness factor for head rotation
+  const lerpFactor = 40; // Smoothness factor for head rotation
 
   useFrame((state, delta) => {
     // Rotate the entire character (slow spin)
     const deltaLerp = lerpFactor * delta * 0.1;
     if (chibiRef.current) {
-      chibiRef.current.rotation.y += 0.001 * delta;
+      chibiRef.current.rotation.y += 1 * delta;
       chibiRef.current.rotation.y %= Math.PI * 2;
 
 
@@ -203,16 +177,17 @@ function TestPage03() {
       <RightOverlay />
       <LeftOverlay />
       <div className='w-[100vw] h-[100vh] items-center justify-center self-center block'>
-        <Canvas camera={{ position: [0, -1, 10], rotation: [0, 0, 0] }} dpr={0.9}>
+        <Canvas frameloop='demand' camera={{ position: [0, -1, 10], rotation: [0, 0, 0] }} dpr={0.9}>
           <MyScene />
         </Canvas>
       </div>
     </div>
 
-    <p>Find me here: 
-      <a href="https://sites.google.com/view/leroyhongprofile33/achievements-and-projects"> https://sites.google.com/view/leroyhongprofile33/achievements-and-projects</a>
+    <p className='text-center'>This site is a work in progress. Until I finish studying for school, I guess this is all I can show...
+      <br />Find my old portfolio here: <a href='https://sites.google.com/view/leroyhongprofile33/achievements-and-projects'>https://sites.google.com/view/leroyhongprofile33/achievements-and-projects</a>
     </p>
-    
+
+
     </>
     
   )
