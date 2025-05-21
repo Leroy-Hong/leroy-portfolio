@@ -198,6 +198,7 @@ function MyScene() {
 
 function TestPage03() {
   return (
+    <>
     <div className='flex justify-center flex-col h-[100vh] w-full' style={{ backgroundImage: 'url(images/ai_upscaled_marble_bg.jpg)', backgroundSize: 'cover' }}>
       <RightOverlay />
       <LeftOverlay />
@@ -207,6 +208,10 @@ function TestPage03() {
         </Canvas>
       </div>
     </div>
+
+    <p>Hello gang</p>
+    </>
+    
   )
 }
 
