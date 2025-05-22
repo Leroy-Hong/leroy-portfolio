@@ -50,12 +50,12 @@ function FrameLimiter({ fps = 60 }) {
 function LeftOverlay() {
   return (
     <div className={`absolute top-0 left-0 justify-center flex-col`}>
-      <NameIcon className='' />
+      <NameIcon className='max-h-[28vh] w-[60vw] h-auto block' preserveAspectRatio="xMinYMin meet" />
       <div className='relative'>
-        <SubheaderIcon className='mt-[-3px]' />
-        <div className='ml-9 absolute top-0 left-0'>
-          <p className={`${medPoppins.className} text-2xl`}>programmer.</p>
-          <p style={{ color: '#57b08d' }} className={`${medPoppins.className} text-2xl`}>designer.</p>
+        <SubheaderIcon  className='mt-[-3px] max-h-[8vh] w-[20vw] h-auto block' preserveAspectRatio="xMinYMin meet"/>
+        <div className='absolute top-0 left-0' style={{ fontSize: "clamp(0.8rem, 0.32 * 10vw, 1.8rem)", marginLeft: "clamp(0px, 4vw, 2.25rem)" }}>
+          <p className={`${medPoppins.className}`}>programmer.</p>
+          <p style={{ color: '#57b08d' }} className={`${medPoppins.className}`}>designer.</p>
         </div>
       </div>
     </div>
@@ -67,12 +67,12 @@ function RightOverlay() {
   return (
     <div className='absolute top-0 right-0 mr-9 mt-3 flex flex-col'>
       <div>
-        <p className={`${heavyPoppins.className} text-8xl tracking-wide text-center`}>19</p>
-        <p className={`${medPoppins.className} w-full mt-[-10px] text-xl self-center text-center`}>years of age</p>
+        <p className={`${heavyPoppins.className} leading-none tracking-wide text-center`} style={{ fontSize: "clamp(0.8em, 1.2 * 10vw, 6rem)"}} >19</p>
+        <p className={`${medPoppins.className} leading-none w-full self-center text-center`} style={{ fontSize: "clamp(0rem, 0.2 * 10vw, 1.25rem)"}}>years of age</p>
       </div>
       <div className='mt-5'>
-        <p className={`${heavyPoppins.className} text-8xl tracking-wide text-center`}>21</p>
-        <p className={`${medPoppins.className} w-full mt-[-10px] text-xl self-center text-center`}>distinctions</p>
+        <p className={`${heavyPoppins.className} leading-none tracking-wide text-center`} style={{ fontSize: "clamp(0.8em, 1.2 * 10vw, 6rem)"}}>21</p>
+        <p className={`${medPoppins.className} leading-none w-full self-center text-center`} style={{ fontSize: "clamp(0rem, 0.2* 10vw, 1.25rem)"}}>distinctions</p>
       </div>
     </div>
   )
@@ -177,14 +177,14 @@ function TestPage03() {
       <RightOverlay />
       <LeftOverlay />
       <div className='w-[100vw] h-[100vh] items-center justify-center self-center block'>
-        <Canvas frameloop='demand' camera={{ position: [0, -1, 10], rotation: [0, 0, 0] }} dpr={0.9}>
+        <Canvas frameloop='demand' camera={{ position: [0.8, -1, 10], rotation: [0, 0, 0] }} dpr={0.9}>
           <MyScene />
         </Canvas>
       </div>
     </div>
 
-    <p className='text-center'>This site is a work in progress. Until I finish studying for school, I guess this is all I can show...
-      <br />Find my old portfolio here: <a href='https://sites.google.com/view/leroyhongprofile33/achievements-and-projects'>https://sites.google.com/view/leroyhongprofile33/achievements-and-projects</a>
+    <p className='text-center block'>This site is a work in progress. Until I finish studying for school, I guess this is all I can show...
+      <br />Find my old portfolio here: <a className='break-all' href='https://sites.google.com/view/leroyhongprofile33/achievements-and-projects'>https://sites.google.com/view/leroyhongprofile33/achievements-and-projects</a>
     </p>
 
 

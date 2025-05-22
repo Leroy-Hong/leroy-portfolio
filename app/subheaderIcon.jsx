@@ -3,13 +3,11 @@ import * as React from "react";
 const SvgIcon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="243"
-    height="70"
     fill="none"
     viewBox="0 0 243 70"
     {...props}
   >
-    <foreignObject width="243" height="70" x="-3.791" y="-3.097">
+    <foreignObject width="243" height="70" x="0" y="0">
       <div
         xmlns="http://www.w3.org/1999/xhtml"
         clipPath="url(#bgblur_0_594_200_clip_path)"
