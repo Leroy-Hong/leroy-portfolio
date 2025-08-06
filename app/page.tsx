@@ -233,15 +233,15 @@ function TestPage03() {
     tl.to(sceneContainerRef.current, { 
       opacity: 0, 
       zIndex: 5, // Lower z-index when fading out
-      duration: 1.5,
+      duration: 1,
       ease: "power2.inOut"
     })
     .to(aboutContainerRef.current, { 
       opacity: 1, 
       zIndex: 15, // Higher z-index when fading in
-      duration: 1.5,
+      duration: 1,
       ease: "power2.out"
-    }, "-=1"); // Start this animation 1 second before the previous one ends
+    }, "-=0.5"); // Start this animation 1 second before the previous one ends
 
     // Create scroll trigger that plays the timeline when a specific point is crossed
     ScrollTrigger.create({
